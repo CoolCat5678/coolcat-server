@@ -7,7 +7,7 @@ export class AuthService {
   constructor(private jwtService: JwtService) { }
 
   async validateUser(username: string, password: string): Promise<{ userId: number, username: string } | null> {
-    // TODO: real login
+    // TODO: 真實的登入邏輯
     await new Promise(resolve => setTimeout(resolve, 500));
     if (username === 'admin' && password === 'password') {
       return { userId: 1, username };
