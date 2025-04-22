@@ -1,8 +1,31 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as os from 'os';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT ?? 3000);
+
+  const port = process.env.PORT ?? 3000;
+
+  const networkInterfaces = os.networkInterfaces();
+  const ipAddresses: string[] = [];
+  for (const interfaceName in networkInterfaces) {
+    networkInterfaces[interfaceName]?.forEach((networkInterface) => {
+      if (networkInterface.family === 'IPv4' && !networkInterface.internal) {
+        ipAddresses.push(networkInterface.address);
+      }
+    });
+  }
+
+  await app.listen(port);
+
+  const ipList = ['localhost', '127.0.0.1', ...ipAddresses];
+
+  ipList.forEach((ip) => {
+    console.log(`App is running at http://${ip}:${port}`);
+  });
 }
 bootstrap();
