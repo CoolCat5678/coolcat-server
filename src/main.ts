@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { setupSwagger } from './swagger/swagger.config';
 import * as os from 'os';
 import * as dotenv from 'dotenv';
 
@@ -20,12 +21,15 @@ async function bootstrap() {
     });
   }
 
+  if (process.env.NODE_ENV !== 'production') {
+    setupSwagger(app);
+  }
+
   await app.listen(port);
-
-  const ipList = ['localhost', '127.0.0.1', ...ipAddresses];
-
+  const ipList = ['localhost', ...ipAddresses];
   ipList.forEach((ip) => {
     console.log(`App is running at http://${ip}:${port}`);
   });
 }
+
 bootstrap();
