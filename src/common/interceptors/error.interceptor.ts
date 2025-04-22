@@ -14,8 +14,6 @@ export class ErrorInterceptor implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
         return next.handle().pipe(
             catchError((err) => {
-                const request = context.switchToHttp().getRequest();
-
                 const status =
                     err instanceof HttpException
                         ? err.getStatus()
@@ -30,7 +28,6 @@ export class ErrorInterceptor implements NestInterceptor {
                     statusCode: status,
                     success: false,
                     timestamp: new Date().toISOString(),
-                    path: request.url,
                     error: typeof message === 'string' ? message : (message as any).message || message,
                 };
 
