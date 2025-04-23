@@ -13,16 +13,16 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
   const port = Number(process.env.PORT) || 3000;
 
+  // Interceptor
   app.useGlobalInterceptors(new ErrorInterceptor(), new ResponseInterceptor());
-
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     transform: true,
   }));
 
+  // use swagger
   if (process.env.NODE_ENV === 'development') {
     setupSwagger(app);
   }

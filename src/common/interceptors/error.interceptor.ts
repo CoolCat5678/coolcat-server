@@ -8,27 +8,29 @@ import {
 } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { QueryFailedError } from 'typeorm';
 
 @Injectable()
 export class ErrorInterceptor implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
         return next.handle().pipe(
             catchError((err) => {
-                const status =
-                    err instanceof HttpException
-                        ? err.getStatus()
-                        : HttpStatus.INTERNAL_SERVER_ERROR;
+                let status = HttpStatus.INTERNAL_SERVER_ERROR;
+                let message: string | object = 'Internal server error';
 
-                const message =
-                    err instanceof HttpException
-                        ? err.getResponse()
-                        : 'Internal server error';
+                if (err instanceof HttpException) {
+                    status = err.getStatus();
+                    message = err.getResponse();
+                } else if (err instanceof QueryFailedError) {
+                    status = HttpStatus.BAD_REQUEST;
+                    message = 'Database error: ' + err.message;
+                }
 
                 const errorResponse = {
                     statusCode: status,
                     success: false,
                     timestamp: new Date().toISOString(),
-                    error: typeof message === 'string' ? message : (message as any).message || message,
+                    error: message
                 };
 
                 return throwError(() => new HttpException(errorResponse, status));
