@@ -39,7 +39,7 @@ export class UsersController {
         },
     })
     getUsers(
-        @Param('id') id: string,
+        @Param('id') id: number,
     ) {
         return this.usersService.read(id);
     }
@@ -110,7 +110,7 @@ export class UsersController {
     })
     @ApiBody({ type: CreateUserDto })
     updateUser(
-        @Param('id') id: string,
+        @Param('id') id: number,
         @Body() updateUserDto: CreateUserDto,
     ) {
         return this.usersService.update(id, updateUserDto);
@@ -135,7 +135,7 @@ export class UsersController {
             },
         },
     })
-    deleteUser(@Param('id') id: string) {
+    deleteUser(@Param('id') id: number) {
         return this.usersService.remove(id);
     }
 }

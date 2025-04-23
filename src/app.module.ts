@@ -7,7 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'database.sqlite',
+      database: './db/database.sqlite',
+      entities: [__dirname + '/**/*.entity.{ts,js}'],
       synchronize: true,
     }),
     AuthModule,
