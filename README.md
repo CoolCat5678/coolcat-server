@@ -13,10 +13,10 @@ $ npm install
 # Note: If you use pnpm install, it may cause conflicts between sqlite and typeorm.
 ```
 
-## Project setup
+## Initialize Environment Variables
 
 ```bash
-$ npm install
+$ pnpm run initenv
 ```
 
 ## Compile and run the project
