@@ -9,7 +9,14 @@
 ## Project setup
 
 ```bash
-$ pnpm install
+$ npm install
+# Note: If you use pnpm install, it may cause conflicts between sqlite and typeorm.
+```
+
+## Project setup
+
+```bash
+$ npm install
 ```
 
 ## Compile and run the project
@@ -23,19 +30,6 @@ $ pnpm run start:dev
 
 # production mode
 $ pnpm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
 ```
 
 ## Run migration
@@ -57,6 +51,18 @@ $ pnpm run migration:run
 
 # 還原最近一次的 migration
 $ pnpm run migration:revert
+```
+## Run tests
+
+```bash
+# unit tests
+$ pnpm run test
+
+# e2e tests
+$ pnpm run test:e2e
+
+# test coverage
+$ pnpm run test:cov
 ```
 
 ## License
