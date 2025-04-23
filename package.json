@@ -22,7 +22,8 @@
     "migration:create": "pnpm run typeorm migration:create -d src/database/data-source.ts",
     "migration:generate": "pnpm run typeorm migration:generate -d src/database/data-source.ts",
     "migration:run": "pnpm run typeorm migration:run -d src/database/data-source.ts",
-    "migration:revert": "pnpm run typeorm migration:revert -d src/database/data-source.ts"
+    "migration:revert": "pnpm run typeorm migration:revert -d src/database/data-source.ts",
+    "initenv": "cp .env.example .env"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
