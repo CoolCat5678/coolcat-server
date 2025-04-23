@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { setupSwagger } from './swagger/swagger.config';
+import { setupSwagger } from './common/config/swagger.config';
+import { printAppRunningMessage } from './common/utils/printhost.utils';
 import * as dotenv from 'dotenv';
-import { printAppRunningMessage } from './utils/printhost.utils';
 
 // Interceptor
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
