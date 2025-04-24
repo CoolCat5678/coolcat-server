@@ -15,6 +15,7 @@ import {
 } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
 
 @ApiTags('Users')
@@ -108,10 +109,10 @@ export class UsersController {
             },
         },
     })
-    @ApiBody({ type: CreateUserDto })
+    @ApiBody({ type: UpdateUserDto })
     updateUser(
         @Param('id') id: number,
-        @Body() updateUserDto: CreateUserDto,
+        @Body() updateUserDto: UpdateUserDto,
     ) {
         return this.usersService.update(id, updateUserDto);
     }
