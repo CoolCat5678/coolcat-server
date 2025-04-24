@@ -24,6 +24,7 @@ async function bootstrap() {
 
   // use swagger
   if (process.env.NODE_ENV === 'development') {
+    app.enableCors();
     setupSwagger(app);
   }
 
