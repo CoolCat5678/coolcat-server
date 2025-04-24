@@ -11,5 +11,5 @@ export function setupSwagger(app: INestApplication): void {
 
     const document = SwaggerModule.createDocument(app, config);
 
-    SwaggerModule.setup('swagger_ui', app, document);
+    SwaggerModule.setup('swagger-ui', app, document);
 }

@@ -24,10 +24,12 @@ async function bootstrap() {
 
   // use swagger
   if (process.env.NODE_ENV === 'development') {
+    app.enableCors();
     setupSwagger(app);
   }
 
   await app.listen(port);
+  console.log(`App is running in "${process.env.NODE_ENV}" mode.`);
   printAppRunningMessage(port);
 }
 
