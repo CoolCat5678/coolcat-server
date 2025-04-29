@@ -39,7 +39,7 @@ export class UsersController {
             }
         },
     })
-    getUsers(
+    getUsers (
         @Param('id') id: number,
     ) {
         return this.usersService.read(id);
@@ -62,7 +62,7 @@ export class UsersController {
             ],
         },
     })
-    getAllUsers() {
+    getAllUsers () {
         return this.usersService.readAll();
     }
 
@@ -78,15 +78,15 @@ export class UsersController {
                 message: 'User created',
                 body: {
                     id: '2',
-                    username: 'newuser',
-                    email: 'newuser@example.com',
+                    username: 'coolcat',
+                    email: 'coolcat@example.com',
                     role: 'user',
                 },
             },
         },
     })
     @ApiBody({ type: CreateUserDto })
-    createUser(@Body() createUserDto: CreateUserDto) {
+    createUser (@Body() createUserDto: CreateUserDto) {
         return this.usersService.create(createUserDto);
     }
 
@@ -102,15 +102,15 @@ export class UsersController {
                 message: 'User updated',
                 body: {
                     id: '1',
-                    username: 'updatedUser',
-                    email: 'updated@example.com',
+                    username: 'coolcat',
+                    email: 'coolcat@example.com',
                     role: 'admin',
                 },
             },
         },
     })
     @ApiBody({ type: UpdateUserDto })
-    updateUser(
+    updateUser (
         @Param('id') id: number,
         @Body() updateUserDto: UpdateUserDto,
     ) {
@@ -129,14 +129,14 @@ export class UsersController {
                 message: 'User deleted',
                 body: {
                     id: '1',
-                    username: 'updatedUser',
-                    email: 'updated@example.com',
+                    username: 'coolcat',
+                    email: 'coolcat@example.com',
                     role: 'admin',
                 },
             },
         },
     })
-    deleteUser(@Param('id') id: number) {
-        return this.usersService.remove(id);
+    deleteUser (@Param('id') id: number) {
+        return this.usersService.delete(id);
     }
 }

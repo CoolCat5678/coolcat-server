@@ -12,7 +12,7 @@ export class UsersService {
         private readonly userRepository: Repository<UserEntity>,
     ) { }
 
-    async read(id: number): Promise<UserEntity> {
+    async read (id: number): Promise<UserEntity> {
         const user = await this.userRepository.findOne({ where: { id } });
         if (!user) {
             throw new NotFoundException('User not found');
@@ -20,16 +20,16 @@ export class UsersService {
         return user;
     }
 
-    async readAll(): Promise<UserEntity[]> {
+    async readAll (): Promise<UserEntity[]> {
         return this.userRepository.find();
     }
 
-    async create(createUserDto: CreateUserDto): Promise<UserEntity> {
+    async create (createUserDto: CreateUserDto): Promise<UserEntity> {
         const newUser = this.userRepository.create(createUserDto);
         return this.userRepository.save(newUser);
     }
 
-    async update(id: number, updateUserDto: UpdateUserDto): Promise<UserEntity> {
+    async update (id: number, updateUserDto: UpdateUserDto): Promise<UserEntity> {
         const user = await this.userRepository.preload({
             id,
             ...updateUserDto,
@@ -40,7 +40,7 @@ export class UsersService {
         return this.userRepository.save(user);
     }
 
-    async remove(id: number): Promise<UserEntity> {
+    async delete (id: number): Promise<UserEntity> {
         const user = await this.read(id);
         return this.userRepository.remove(user);
     }
