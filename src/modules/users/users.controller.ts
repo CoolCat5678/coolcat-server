@@ -16,7 +16,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UserEntity } from './entities/user.entity';
+import { UserDto } from './dto/user.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -28,20 +28,17 @@ export class UsersController {
     @ApiResponse({
         status: 200,
         description: 'Successfully fetched user',
-        type: UserEntity,
+        type: UserDto,
         schema: {
-            example:
-            {
+            example: {
                 id: '1',
                 username: 'coolcat',
                 email: 'coolcat@example.com',
                 role: 'user',
-            }
+            },
         },
     })
-    getUsers (
-        @Param('id') id: number,
-    ) {
+    getUser (@Param('id') id: number): Promise<UserDto> {
         return this.usersService.read(id);
     }
 
@@ -50,7 +47,7 @@ export class UsersController {
     @ApiResponse({
         status: 200,
         description: 'Successfully fetched users',
-        type: [UserEntity],
+        type: [UserDto],
         schema: {
             example: [
                 {
@@ -62,7 +59,7 @@ export class UsersController {
             ],
         },
     })
-    getAllUsers () {
+    getAllUsers (): Promise<UserDto[]> {
         return this.usersService.readAll();
     }
 
@@ -71,7 +68,7 @@ export class UsersController {
     @ApiResponse({
         status: 201,
         description: 'User created successfully',
-        type: UserEntity,
+        type: UserDto,
         schema: {
             example: {
                 statusCode: 201,
@@ -86,7 +83,7 @@ export class UsersController {
         },
     })
     @ApiBody({ type: CreateUserDto })
-    createUser (@Body() createUserDto: CreateUserDto) {
+    createUser (@Body() createUserDto: CreateUserDto): Promise<UserDto> {
         return this.usersService.create(createUserDto);
     }
 
@@ -95,7 +92,7 @@ export class UsersController {
     @ApiResponse({
         status: 200,
         description: 'User updated successfully',
-        type: UserEntity,
+        type: UserDto,
         schema: {
             example: {
                 statusCode: 200,
@@ -113,7 +110,7 @@ export class UsersController {
     updateUser (
         @Param('id') id: number,
         @Body() updateUserDto: UpdateUserDto,
-    ) {
+    ): Promise<UserDto> {
         return this.usersService.update(id, updateUserDto);
     }
 
@@ -122,7 +119,7 @@ export class UsersController {
     @ApiResponse({
         status: 200,
         description: 'User deleted successfully',
-        type: UserEntity,
+        type: UserDto,
         schema: {
             example: {
                 statusCode: 200,
@@ -136,7 +133,7 @@ export class UsersController {
             },
         },
     })
-    deleteUser (@Param('id') id: number) {
+    deleteUser (@Param('id') id: number): Promise<UserDto> {
         return this.usersService.delete(id);
     }
 }
